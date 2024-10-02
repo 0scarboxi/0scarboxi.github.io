@@ -18,7 +18,7 @@
       font-family: 'Courier New', Courier, monospace;
     }
 
-    a{
+    a {
         display: none;
     }
 
