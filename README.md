@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,6 +16,10 @@
       height: 100vh;
       background-color: black;
       font-family: 'Courier New', Courier, monospace;
+    }
+
+    a{
+        display: none;
     }
 
     .timer {
