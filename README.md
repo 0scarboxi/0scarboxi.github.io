@@ -8,14 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  
   <style>
     :root {
       --colorOscar: #ffa60075;
+      --colorBlue: #0000ff; /* Definir color azul */
     }
 
-    a,h1 {display: none;}
-    
     body {
       margin: 0;
       height: 100vh;
@@ -73,7 +71,6 @@
 
     .buttons {
       grid-row: 11; /* Fila 11 */
-
       display: flex;
       justify-content: center;
       text-align: center;
@@ -92,6 +89,12 @@
       height: 40px;
     }
 
+    a,h1 {display: none;}
+
+    .blue-flash {
+      color: var(--colorBlue);
+      text-shadow: 0 0 20px var(--colorBlue), 0 0 30px var(--colorBlue);
+    }
   </style>
 </head>
 <body>
@@ -104,20 +107,20 @@
   <input type="text" id="taskInput" placeholder="Escribe una tarea y presiona Enter">
 
   <div class="buttons">
-    <button onclick="resetTimer(confirm('seguro que quieres borrar?'))">
+    <button onclick="resetTimer(confirm('Seguro que quieres borrar?'))">
       <i class="fas fa-redo"></i> Reset
     </button>
     <button onclick="toggleFullScreen()">
       <i class="fas fa-expand"></i> Pantalla Completa
     </button>
   </div>
-  
 
   <script>
     let timerElement = document.getElementById("timer");
     let seconds = 0;
     let previousSeconds = 0;
     let interval = setInterval(updateTimer, 1000);
+    let blinkInterval = setInterval(blinkTimer, 1200000); // Cada 20 minutos  
 
     function updateTimer() {
       seconds++;
@@ -126,6 +129,13 @@
       timerElement.textContent = 
         String(minutes).padStart(2, '0') + ":" + 
         String(remainingSeconds).padStart(2, '0');
+    }
+
+    function blinkTimer() {
+      timerElement.classList.add("blue-flash");
+      setTimeout(() => {
+      timerElement.classList.remove("blue-flash");
+    }, 10000); // Mantener el parpadeo durante 10 segundos
     }
 
     function resetTimer() {
@@ -175,11 +185,10 @@
 
         const newTaskItem = document.createElement("li");
         newTaskItem.textContent = `${task} - Uso: ${time} (inversión: ${timeFormatted}) [Hora: ${currentTime}]`;
-        taskList.appendChild(newTaskItem);
+        taskList.prepend(newTaskItem);
         taskInput.value = ""; // Limpiar el campo de texto después de enviar
       }
     });
-
   </script>
 </body>
 </html>
