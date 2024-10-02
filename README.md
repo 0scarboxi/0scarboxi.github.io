@@ -14,6 +14,8 @@
       --colorOscar: #ffa60075;
     }
 
+    a,h1 {display: none;}
+    
     body {
       margin: 0;
       height: 100vh;
